@@ -1,0 +1,330 @@
+/* Quiet, local-first interaction polish. No content depends on an animation. */
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-fast: 180ms;
+  --motion-switch: 280ms;
+}
+
+/* A fixed wash gives the heading depth without a looping background effect. */
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: 0 0 auto;
+  height: min(470px, 70vw);
+  background: radial-gradient(ellipse at 50% 20%, rgb(255 187 140 / 13%), transparent 68%);
+}
+
+.site-nav {
+  transition: background var(--motion-switch) ease, border-color var(--motion-switch) ease, box-shadow var(--motion-switch) ease;
+}
+.site-nav.is-scrolled {
+  background: rgb(249 249 250 / 94%);
+  border-bottom-color: rgb(200 200 207 / 80%);
+  box-shadow: 0 8px 28px -22px rgb(29 29 31 / 35%);
+}
+.nav-links a {
+  transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease, background var(--motion-fast) ease, transform var(--motion-fast) var(--motion-ease);
+}
+.nav-links a:not(.nav-report):not(.nav-cta) {
+  position: relative;
+  text-decoration: none;
+}
+.nav-links a:not(.nav-report):not(.nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--motion-ease);
+}
+.nav-links a[aria-current]:not(.nav-report):not(.nav-cta)::after {
+  transform: scaleX(1);
+}
+.nav-toggle {
+  gap: 7px;
+}
+.nav-toggle > span {
+  display: inline-block;
+  transition: transform 200ms var(--motion-ease);
+}
+.nav-toggle[aria-expanded="true"] > span {
+  transform: rotate(45deg);
+}
+
+/* A single measured highlight follows the selected tab, including wrapped rows. */
+.has-tab-indicator {
+  position: relative;
+  isolation: isolate;
+}
+.has-tab-indicator > .tab-indicator {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border: 1px solid #eeaa7e;
+  border-radius: 8px;
+  background: var(--orange-soft);
+  box-shadow: 0 2px 7px -5px rgb(173 66 0 / 24%);
+  pointer-events: none;
+  visibility: hidden;
+}
+.has-tab-indicator > .tab-indicator.is-positioned {
+  visibility: visible;
+  transition: transform var(--motion-switch) var(--motion-ease), width var(--motion-switch) var(--motion-ease), height var(--motion-switch) var(--motion-ease);
+}
+.has-tab-indicator > button {
+  position: relative;
+  z-index: 1;
+}
+.has-tab-indicator:has(> .tab-indicator.is-positioned) > button:is(.is-active, [aria-selected="true"]) {
+  background: transparent;
+  border-color: transparent;
+}
+.hero-tabs > .tab-indicator {
+  border-color: #f2d6c4;
+  border-radius: 6px;
+}
+.hero-tabs button, .tab-button {
+  transition: color var(--motion-fast) ease, background var(--motion-fast) ease, border-color var(--motion-fast) ease;
+}
+.has-tab-indicator > button:focus-visible {
+  outline-offset: 3px;
+}
+
+/* Training remains three selectable stages, with a calm connected-step layout. */
+.training-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  position: relative;
+  isolation: isolate;
+}
+.training-tabs::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: var(--line-strong);
+}
+.training-tabs > .tab-button {
+  width: 100%;
+  min-height: 48px;
+  padding-inline: 10px;
+  text-align: center;
+  background: var(--white);
+}
+.training-module[data-active-stage] .stage-panel:not([hidden]) {
+  border-top-color: #efbc9c;
+  box-shadow: 0 8px 24px -23px rgb(173 66 0 / 35%);
+}
+
+.button,
+.nav-toggle,
+.media-caption button,
+.demo-toolbar button,
+.image-controls button,
+.image-controls a,
+.dialog-topbar button,
+#back-to-top {
+  transition: transform var(--motion-fast) var(--motion-ease), background var(--motion-fast) ease, color var(--motion-fast) ease, border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+}
+.button > span[aria-hidden="true"] {
+  display: inline-block;
+  transition: transform 220ms var(--motion-ease);
+}
+.clip-card {
+  transition: transform 220ms var(--motion-ease), border-color var(--motion-fast) ease, box-shadow 220ms ease;
+}
+.clip-card span {
+  transition: color var(--motion-fast) ease, background var(--motion-fast) ease;
+}
+.figure-card,
+.disclosure {
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+.figure-button {
+  transition: background var(--motion-fast) ease;
+}
+.figure-zoom {
+  transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease, background var(--motion-fast) ease, transform 220ms var(--motion-ease);
+}
+.disclosure summary {
+  transition: color var(--motion-fast) ease, background var(--motion-fast) ease;
+}
+.disclosure summary::after {
+  transition: color var(--motion-fast) ease;
+}
+.disclosure[open] {
+  border-color: #d9c8bc;
+}
+.disclosure[open] > summary {
+  background: #fffcf9;
+}
+.footer-inner a, .comparison-meta a, .figure-card figcaption a {
+  transition: color var(--motion-fast) ease, text-decoration-color var(--motion-fast) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover,
+  .nav-links .nav-report:hover,
+  .nav-links .nav-cta:hover {
+    transform: translateY(-2px);
+  }
+  .button-primary:hover {
+    box-shadow: 0 8px 18px -10px rgb(29 29 31 / 36%);
+  }
+  .button-secondary:hover {
+    box-shadow: 0 6px 16px -12px rgb(173 66 0 / 35%);
+  }
+  .hero-actions a[href="#explore"]:hover > span[aria-hidden="true"] {
+    transform: translateY(2px);
+  }
+  .button:not([href="#explore"]):not([download]):hover > span[aria-hidden="true"] {
+    transform: translate(2px, -2px);
+  }
+  .button[download]:hover > span[aria-hidden="true"] {
+    transform: translateY(2px);
+  }
+  .nav-links a:not(.nav-report):not(.nav-cta):hover::after {
+    transform: scaleX(1);
+  }
+  .nav-toggle:hover,
+  .media-caption button:hover,
+  .demo-toolbar button:not(:disabled):hover,
+  .image-controls button:not(:disabled):hover,
+  .image-controls a:hover,
+  .dialog-topbar button:hover,
+  #back-to-top:hover {
+    transform: translateY(-1px);
+  }
+  .clip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px -11px rgb(29 29 31 / 28%);
+  }
+  .clip-card:is(.is-active, [aria-pressed="true"]):hover {
+    box-shadow: 0 0 0 1px var(--orange), 0 8px 18px -11px rgb(173 66 0 / 24%);
+  }
+  .figure-card:has(.figure-button:hover) {
+    border-color: #dcbca8;
+  }
+  .figure-button:hover .figure-zoom {
+    transform: scale(1.08);
+    background: var(--orange-soft);
+  }
+  .disclosure summary:hover {
+    background: #fffcf9;
+  }
+}
+
+.button:active,
+.nav-toggle:active,
+.nav-links .nav-report:active,
+.nav-links .nav-cta:active,
+.media-caption button:active,
+.demo-toolbar button:not(:disabled):active,
+.image-controls button:not(:disabled):active,
+.image-controls a:active,
+.dialog-topbar button:active,
+#back-to-top:active,
+.clip-card:active {
+  transform: translateY(1px);
+  transition-duration: 90ms;
+}
+.figure-button:active .figure-zoom {
+  transform: scale(.95);
+}
+
+dialog[open]::backdrop {
+  animation: report-backdrop-in 180ms ease-out both;
+}
+@keyframes report-backdrop-in {
+  from { background-color: rgb(15 15 20 / 0%); backdrop-filter: blur(0); }
+  to { background-color: rgb(15 15 20 / 72%); backdrop-filter: blur(5px); }
+}
+@keyframes report-menu-in {
+  from { opacity: .65; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .nav-links.is-open,
+  .site-nav.is-open .nav-links,
+  .nav-toggle[aria-expanded="true"] + .nav-links {
+    animation: report-menu-in 200ms var(--motion-ease) both;
+  }
+  .nav-links a:not(.nav-report):not(.nav-cta)::after {
+    right: auto;
+    left: 5px;
+    width: 22px;
+    bottom: 5px;
+  }
+  .training-tabs {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero::before { height: 340px; }
+  .hero-tabs { flex-wrap: wrap; }
+  .hero-tabs > button { flex: 1 1 auto; }
+  .training-tabs {
+    gap: 8px;
+  }
+  .training-tabs > .tab-button {
+    min-height: 46px;
+    padding: 9px 5px;
+    font-size: 10px;
+  }
+}
+
+/* Preference changes also take effect while the page is open. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .button, .nav-toggle, .nav-links a, .media-caption button,
+  .demo-toolbar button, .image-controls button, .image-controls a,
+  .dialog-topbar button, #back-to-top, .clip-card, .figure-zoom,
+  .button > span[aria-hidden="true"] {
+    transform: none !important;
+  }
+}
+
+@media print {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hero::before, .tab-indicator, .training-tabs::before {
+    display: none !important;
+  }
+  .training-tabs > .tab-button {
+    background: #fff !important;
+    border-color: var(--line) !important;
+  }
+  .training-tabs > .tab-button:is(.is-active, [aria-selected="true"]) {
+    border-color: var(--orange) !important;
+  }
+  .training-module .stage-panel, .figure-card, .disclosure {
+    box-shadow: none !important;
+  }
+}

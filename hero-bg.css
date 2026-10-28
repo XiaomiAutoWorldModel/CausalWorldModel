@@ -1,0 +1,61 @@
+/* Opening scene: the driving video plays full-bleed behind the title. */
+.hero.hero-bg {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(500px, calc(100svh - var(--nav-height)), 860px);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: #0b0b0d;
+  color: #fff;
+}
+.hero.hero-bg::before { display: none; }
+.hero-bg-media { position: absolute; inset: 0; z-index: -2; }
+.hero-bg-media video { display: block; width: 100%; height: 100%; object-fit: cover; background: #0b0b0d; }
+.hero-bg-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgb(8 8 10 / 50%) 0%, rgb(8 8 10 / 52%) 50%, rgb(8 8 10 / 62%) 100%);
+}
+.hero-bg-content {
+  width: 100%;
+  max-width: 1040px;
+  margin-inline: auto;
+  padding: 72px var(--gutter);
+  text-align: center;
+}
+.hero.hero-bg .eyebrow { margin: 0; color: #ffb27a; }
+.hero.hero-bg h1 { margin-top: 22px; color: #fff; text-shadow: 0 2px 24px rgb(0 0 0 / 35%); }
+.hero.hero-bg .accent { color: #ff7a2b; }
+.hero.hero-bg .hero-description { margin: 22px auto 0; max-width: 760px; color: rgb(255 255 255 / 84%); }
+.hero.hero-bg .hero-description strong { color: #fff; font-weight: 500; }
+.hero-bg-actions { display: flex; justify-content: center; margin-top: 34px; }
+.hero-bg-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 22px;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.hero-bg-actions a:hover { border-color: #ff7a2b; background: rgb(255 255 255 / 16%); }
+.hero-bg-actions a:focus-visible { outline: 3px solid #ff7a2b; outline-offset: 3px; }
+@media (max-width: 760px) {
+  .hero.hero-bg { min-height: clamp(460px, 78svh, 700px); }
+  .hero-bg-content { padding: 56px var(--gutter); }
+  .hero-bg-actions { margin-top: 26px; }
+}
+@media print { .hero-bg-media, .hero-bg-scrim { display: none; } .hero.hero-bg { min-height: 0; background: none; color: #000; } .hero.hero-bg h1, .hero.hero-bg .hero-description strong { color: #000; text-shadow: none; } }

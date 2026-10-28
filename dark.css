@@ -1,0 +1,144 @@
+/* Optional dark theme. Activated with <html data-theme="dark"> (see theme.js); light stays the default. */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; padding: 0;
+  border: 1px solid var(--line-strong); border-radius: 50%;
+  background: var(--white); color: var(--ink);
+  font: inherit; font-size: 17px; line-height: 1; cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+.theme-toggle:hover { border-color: var(--orange); color: var(--orange-dark); }
+.theme-toggle:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.theme-toggle .icon-sun { display: none; }
+@media (max-width: 760px) { .theme-toggle { width: 34px; height: 34px; } }
+
+@media screen {
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0b0b0d;
+    --white: #151518;
+    --ink: #f2f2f5;
+    --muted: #a3a3ad;
+    --faint: #7f7f89;
+    --line: #2a2a30;
+    --line-strong: #3b3b43;
+    --orange: #ff6a13;
+    --orange-dark: #ff9650;
+    --orange-soft: rgb(255 106 19 / 16%);
+    --shadow: 0 12px 42px -28px rgb(0 0 0 / 80%);
+  }
+  html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+  html[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+  html[data-theme="dark"] ::selection { background: rgb(255 106 19 / 38%); color: #fff; }
+
+  /* Navigation */
+  html[data-theme="dark"] .site-nav { border-bottom-color: rgb(255 255 255 / 9%); background: rgb(11 11 13 / 92%); }
+  html[data-theme="dark"] .site-nav.is-scrolled { background: rgb(11 11 13 / 94%); border-bottom-color: rgb(255 255 255 / 12%); box-shadow: 0 8px 28px -22px rgb(0 0 0 / 80%); }
+
+  /* Buttons and tabs */
+  html[data-theme="dark"] .button-primary:hover { background: #d9d9de; box-shadow: 0 3px 12px rgb(0 0 0 / 40%); }
+  html[data-theme="dark"] .button-secondary:hover,
+  html[data-theme="dark"] .media-caption button:hover,
+  html[data-theme="dark"] .demo-toolbar button:hover,
+  html[data-theme="dark"] .image-controls button:hover,
+  html[data-theme="dark"] .image-controls a:hover { background: #1d1a17; }
+  html[data-theme="dark"] .tab-button:hover { background: #1c1c20; }
+  html[data-theme="dark"] .tab-button.is-active,
+  html[data-theme="dark"] .tab-button[aria-selected="true"] { border-color: #b05a24; }
+  html[data-theme="dark"] .has-tab-indicator > .tab-indicator { border-color: #b05a24; box-shadow: none; }
+  html[data-theme="dark"] .hero-tabs > .tab-indicator { border-color: #5a3820; }
+  html[data-theme="dark"] .training-tabs > .tab-button { background: var(--white) !important; }
+
+  /* Hero */
+  html[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 50% 20%, rgb(255 106 19 / 10%), transparent 68%); }
+  html[data-theme="dark"] .hero.is-enhanced .hero-veil {
+    background: linear-gradient(180deg, rgb(11 11 13 / 84%) 0%, rgb(11 11 13 / 95%) 26%, rgb(11 11 13 / 94%) 68%, rgb(11 11 13 / 72%) calc(100% - 54px), transparent 100%);
+  }
+  html[data-theme="dark"] .hero.is-enhanced.is-inline-playing #hero-media-panel { box-shadow: 0 22px 56px rgb(0 0 0 / 55%), 0 3px 12px rgb(0 0 0 / 40%); }
+
+  /* Surfaces, rules and small controls */
+  html[data-theme="dark"] .demo-facts,
+  html[data-theme="dark"] .figure-card figcaption,
+  html[data-theme="dark"] .disclosure[open] > summary,
+  html[data-theme="dark"] .metric-card .metric-context { border-color: var(--line); }
+  html[data-theme="dark"] .clip-card img { background: #222226; }
+  html[data-theme="dark"] .clip-card:hover { box-shadow: 0 3px 10px rgb(0 0 0 / 40%); }
+  html[data-theme="dark"] .stage-tags span { border-color: #34343a; color: #b2b2bc; }
+  html[data-theme="dark"] .video-status { border-color: #7a4a25; background: #2a1b10; color: #ffcfa8; }
+  html[data-theme="dark"] .disclosure[open],
+  html[data-theme="dark"] .training-module[data-active-stage] .stage-panel:not([hidden]) { border-color: #4a3a2e; }
+  html[data-theme="dark"] .disclosure[open] > summary,
+  html[data-theme="dark"] .disclosure summary:hover { background: #1b1a19; }
+  html[data-theme="dark"] .figure-card:has(.figure-button:hover) { border-color: #6a4a35; }
+  html[data-theme="dark"] .figure-zoom { background: rgb(21 21 24 / 92%); color: var(--ink); }
+  html[data-theme="dark"] #back-to-top { background: rgb(21 21 24 / 95%); box-shadow: 0 3px 14px rgb(0 0 0 / 50%); }
+  html[data-theme="dark"] .demo-player.is-single .video-stage { box-shadow: 0 18px 48px rgb(0 0 0 / 55%), 0 2px 6px rgb(0 0 0 / 40%); }
+  html[data-theme="dark"] .metric-grid { border-block-color: var(--line); }
+  html[data-theme="dark"] .metric-card + .metric-card { border-left-color: var(--line); }
+
+  /* Figures are white-background bitmaps: keep a light plate behind them. */
+  html[data-theme="dark"] .figure-button,
+  html[data-theme="dark"] .figure-button:hover { background: #fff; }
+  html[data-theme="dark"] .figure-card { border-color: var(--line-strong); }
+  html[data-theme="dark"] #zoom-image { background: #fff; box-shadow: none; }
+
+  /* Dialogs */
+  html[data-theme="dark"] dialog { border-color: var(--line-strong); }
+  html[data-theme="dark"] .dialog-topbar { background: #1b1b1f; }
+  html[data-theme="dark"] .image-viewport { background: #0f0f12; }
+
+  /* Tables */
+  html[data-theme="dark"] .report-table th,
+  html[data-theme="dark"] .report-table td { border-bottom-color: var(--line); }
+  html[data-theme="dark"] .report-table thead th,
+  html[data-theme="dark"] .report-table thead th:first-child,
+  html[data-theme="dark"] .capability-table thead th:first-child { background: #202025; color: #b9bfc9; }
+  html[data-theme="dark"] .report-table th:first-child,
+  html[data-theme="dark"] .report-table td:first-child { background: var(--white); box-shadow: 1px 0 0 var(--line); }
+  html[data-theme="dark"] .report-table thead th:first-child { background: #202025; }
+  html[data-theme="dark"] .report-table tbody tr:hover > * { background: #1c1c20; }
+  html[data-theme="dark"] .report-table .ours:hover > *,
+  html[data-theme="dark"] .report-table tr.highlight:hover > * { background: rgb(255 106 19 / 24%); }
+  html[data-theme="dark"] .report-table .ours > *,
+  html[data-theme="dark"] .report-table tr.highlight > *,
+  html[data-theme="dark"] .report-table tr[data-highlight] > * { background: var(--orange-soft); }
+
+  /* Result charts */
+  html[data-theme="dark"] .result-chart { --chart-rule: #2c2c32; background: var(--white); }
+  html[data-theme="dark"] .result-chart-toolbar select { background-color: #1c1c20; }
+  html[data-theme="dark"] .chart-method,
+  html[data-theme="dark"] .chart-value,
+  html[data-theme="dark"] .chart-column-value,
+  html[data-theme="dark"] .chart-column-label,
+  html[data-theme="dark"] .chart-group-label { color: #d3d6dd; }
+  html[data-theme="dark"] .chart-bar.is-ours .chart-method,
+  html[data-theme="dark"] .chart-bar.is-ours .chart-value,
+  html[data-theme="dark"] .chart-column.is-ours .chart-column-value,
+  html[data-theme="dark"] .chart-column.is-ours .chart-column-label { color: var(--orange-dark); }
+  html[data-theme="dark"] .chart-track {
+    border-left-color: #4a4a53; background-color: #25252a;
+    background-image: linear-gradient(to right, transparent calc(100% - 1px), #3a3a42 0);
+  }
+  html[data-theme="dark"] .chart-columns::before { border-bottom-color: #4a4a53; }
+  html[data-theme="dark"] .chart-fill,
+  html[data-theme="dark"] .chart-column-fill { background: #8493a8; }
+  html[data-theme="dark"] .chart-bar.is-ours .chart-fill,
+  html[data-theme="dark"] .chart-column.is-ours .chart-column-fill { background: var(--orange); }
+  html[data-theme="dark"] .chart-series.series-0 .chart-fill { background: #9aabc4; }
+  html[data-theme="dark"] .chart-series.series-1 .chart-fill { background: #66778e; }
+  html[data-theme="dark"] .chart-series.series-0 .chart-series-name { color: #aab6c8; }
+  html[data-theme="dark"] .chart-series.series-1 .chart-series-name { color: #94a3b8; }
+  html[data-theme="dark"] .chart-group.is-ours .series-0 .chart-fill { background: var(--orange); }
+  html[data-theme="dark"] .chart-group.is-ours .series-1 .chart-fill { background: #f6a566; }
+  html[data-theme="dark"] .chart-group.is-ours .series-0 .chart-series-name { color: #ff9650; }
+  html[data-theme="dark"] .chart-group.is-ours .series-1 .chart-series-name { color: #ffb27a; }
+
+  /* Heat maps */
+  html[data-theme="dark"] .chart-heatmap-scroll { border-color: var(--line); scrollbar-color: #4a4a53 #1c1c20; }
+  html[data-theme="dark"] .chart-heatmap { color: #ffe9d9; }
+  html[data-theme="dark"] .chart-heatmap thead th { color: #b4bac5; }
+  html[data-theme="dark"] .chart-heatmap tbody th { background: #1c1c20; color: #d3d6dd; }
+  html[data-theme="dark"] .chart-heatmap-row.is-ours > th { color: var(--orange-dark); }
+  html[data-theme="dark"] .chart-heatmap td { background: rgba(255, 106, 19, calc(.06 + var(--heat, 0) * .46)); }
+  html[data-theme="dark"] .chart-heatmap-gradient { border-color: rgb(255 150 80 / 25%); background: linear-gradient(to right, rgb(255 106 19 / 6%), rgb(255 106 19 / 52%)); }
+}
